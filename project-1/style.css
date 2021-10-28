@@ -3,11 +3,37 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
+}
+.reset{
+    padding-left: 80px;
+    
+}
+.reset-to-zero{
+    height: 50px;
+    border-radius: 0.5rem;
+    background-color: red;
+    color: white;
+    font-size: 1.5rem;
+    padding:5px 10px 5px 10px;
+    box-shadow: 0px 0px 10px 0px inset rgb(61, 1, 1);
+    border: 2px solid black;
 }
 .btn-minus,.btn-plus{
     height: 50px;
     width: 50px;
-    background-color: grey;
+    background-color: rgb(167, 164, 164);
     font-size: 2.5rem;
+    border: 2px solid black;
 }
+#counter{
+    height: 42px;
+    font-size: 2.3rem;
+    box-shadow: 0px 0px 10px 1px inset grey;
+    width: 300px;
+    border: 2px solid black;
+    text-align: center;
+    
+}
+
 
