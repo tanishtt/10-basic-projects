@@ -7,19 +7,75 @@ const taskcounter=document.getElementById('tasks-counter');
 
 function deletetask(taskid)
 {
-
-}
-function marktaskascomplete(taskid)
+const newtasks=tasks.filter(function(task)
 {
+    return tasks.id!=taskid;
+});
 
+
+
+
+
+tasks=newtasks;
+rendertask();
+shownotification("deleted task succesfully");
+//console.log(tasks);
 }
+function toggletask(taskid)
+{
+for(var i=0;i<tasks.length;i++)
+{
+    if(tasks.id==taskid)
+    {
+        tasks.done=!tasks.done;
+        rendertask();
+        shownotification("task toggled succesfully");
+        return;
+    }
+}
+shownotification("could not toggled the task");
+}
+////////////////////////////////////////////////////////
+
+
+
+function addtasktoDOM(task)
+{
+    
+const li=document.createElement("li");
+console.log("...........",li);
+li.innerHTML=`<input type="checkbox"   id="${task.id}"   ${task.done? "checked":""}   class="custom-checkbox">
+              <label for=${task.id}>${task.text}</label>
+              <img src="images/deletebutton.png"  class="delete" data-id="${task.id}">`;
+console.log("...........",li);
+tasklist.append(li);
+}
+
+
+//////////////////////////////////////////////////////
+
+
 function rendertask()
 {
-
+tasklist.innerHTML="";
+for(var i=0;i<tasks.length;i++)
+{
+    addtasktoDOM(tasks[i]);
 }
+taskcounter.innerHTML=tasks.length;
+}
+
+
+
 function addtask(task)
 {
-console.log(task);
+    if(task)
+    {
+        tasks.push(task);
+        rendertask();
+        shownotification("added task succesfully");
+    }
+//console.log(tasks);
 }
 function handleinputkeypress(e)
 {
@@ -28,7 +84,7 @@ function handleinputkeypress(e)
     //console.log(e.target);
     if(e.key==='Enter')
     {
-        console.log(e.target.value);
+        //console.log(e.target.value);
         const text=e.target.value;
         if(!text)
     {
@@ -49,9 +105,9 @@ function handleinputkeypress(e)
 }
 function shownotification(text)
 {
-
+alert(text);
 }
-addtaskinput.addEventListener("keyup",handleinputkeypress);
+addtaskinput.addEventListener("keypress",handleinputkeypress);
 
 /*var now=new Date();//'January 5 2022');
 console.log(now);
