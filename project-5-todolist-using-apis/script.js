@@ -1,4 +1,4 @@
-const tasks=[];
+var tasks=[];
 const tasklist=document.getElementById('list');
 const addtaskinput=document.getElementById('add');
 const taskcounter=document.getElementById('tasks-counter');
@@ -7,15 +7,16 @@ const taskcounter=document.getElementById('tasks-counter');
 
 function deletetask(taskid)
 {
-const newtasks=tasks.filter(function(task)
+var newtasks=tasks.filter(function(task)
 {
-    return tasks.id!=taskid;
+    return task.id!=taskid;
 });
 
 
 
 
-
+console.log(tasks);
+console.log(newtasks);
 tasks=newtasks;
 rendertask();
 shownotification("deleted task succesfully");
@@ -25,9 +26,9 @@ function toggletask(taskid)
 {
 for(var i=0;i<tasks.length;i++)
 {
-    if(tasks.id==taskid)
+    if(tasks[i].id==taskid)
     {
-        tasks.done=!tasks.done;
+        tasks[i].done=!tasks[i].done;
         rendertask();
         shownotification("task toggled succesfully");
         return;
@@ -107,8 +108,25 @@ function shownotification(text)
 {
 alert(text);
 }
-addtaskinput.addEventListener("keypress",handleinputkeypress);
 
+function handleclickeventlistener(e)
+{
+const target=e.target;
+
+if(target.className=='delete')
+{
+const taskid=target.dataset.id;
+//console.log(taskid);
+deletetask(taskid);
+}
+else if(target.className=='custom-checkbox')
+{
+const taskid=target.id;
+toggletask(taskid);
+}
+}
+addtaskinput.addEventListener("keypress",handleinputkeypress);
+document.addEventListener("click",handleclickeventlistener);
 /*var now=new Date();//'January 5 2022');
 console.log(now);
 console.log(typeof(now));
